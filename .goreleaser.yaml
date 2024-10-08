@@ -15,7 +15,7 @@ before:
 builds:
   - id: cli
     binary: hello
-    main: ./cli/cmd
+    main: ./hello/cmd
     env:
       - CGO_ENABLED=0
     goos:
