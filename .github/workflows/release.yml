@@ -5,14 +5,18 @@ on:
     - main
 
 jobs:
-  check:
+  check-release:
     runs-on: ubuntu-latest
+    outputs:
+      is_release: ${{ steps.check.outputs.release_commit }}
     steps:
-    - name: check release
-      run: echo "RELEASE_COMMIT=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
+    - id: check
+      run: echo "release_commit=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
 
   non-release:
-    if: ${{ ! steps.chck.outputs.RELEASE_COMMIT }}
+    if: ${{ ! needs.check-release.outputs.is_release }}
+    needs:
+    - check-release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +24,8 @@ jobs:
       run: echo "This is not a release commit"
 
   update-tag:
-    if: ${{ steps.chck.outputs.RELEASE_COMMIT }}
+    if: ${{ needs.check-release.outputs.is_release }}
+    needs: check-release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
