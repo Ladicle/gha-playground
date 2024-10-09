@@ -9,13 +9,18 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
+  update-file:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    outputs:
+      new_version: ${{ steps.tag_version.outputs.new_version }}
     steps:
-    # Runs a single command using the runners shell
+    - uses: actions/checkout@v4
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        default_bump: minor
     - name: Send greeting
-      run: which sed
+      run: |
+        sed -i 's/^World:.*/World: v${{ steps.tag_version.outputs.new_tag }}/' versions
