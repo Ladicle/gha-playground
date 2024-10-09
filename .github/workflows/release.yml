@@ -24,7 +24,7 @@ jobs:
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
 
   non-release:
-    if: needs.check-release.outputs.release_commit == false
+    if: needs.check-release.outputs.release_commit == 'false'
     needs:
     - check-release
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
         echo "This is not a release commit '${{ needs.check-release.outputs.release_commit }}'"
 
   update-tag:
-    if: needs.check-release.outputs.release_commit == true
+    if: needs.check-release.outputs.release_commit == 'true'
     needs: check-release
     runs-on: ubuntu-latest
     steps:
