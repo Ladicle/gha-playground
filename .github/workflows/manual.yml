@@ -5,6 +5,9 @@ on:
       custom_tag:
         description: "input a new tag name if you want to set non minor versions. (e.g., 0.23.1) (default: bump minor versions)"
 
+permissions:
+  pull-requests: write
+
 jobs:
   update-file:
     runs-on: ubuntu-latest
@@ -31,6 +34,6 @@ jobs:
         commit-message: Release ${{ steps.tag_version.outputs.new_tag }}
         add-paths: versions
         branch: release-${{ github.event.inputs.custom_tag }}
-        reviewers: Ladicle
+        reviewers: ${{ github.actor }}
         body: This pull-request is created by `manual workflow` by ${{ github.actor }}
         author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
