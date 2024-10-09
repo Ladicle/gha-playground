@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-tag:
-    if: "startsWith(github.event.head_commit.message, 'Release v')"
+    if: "startsWith(github.event.head_commit.message, 'Binary Release v')"
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.tag_version.outputs.new_version }}
