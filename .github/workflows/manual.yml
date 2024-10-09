@@ -1,13 +1,10 @@
-# This is a basic workflow that is manually triggered
-
 name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
+    inputs:
+      custom_tag:
+        description: "input a new tag name if you want to set non minor versions. (default: bump minor versions)"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   update-file:
     runs-on: ubuntu-latest
@@ -20,13 +17,15 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        custom_tag: ${{ github.event.inputs.custom_tag }}
         default_bump: minor
         dry_run: true
-    - name: Send greeting
+    - name: Update versions
       run: |
         sed -i 's/^World:.*/World: ${{ steps.tag_version.outputs.new_tag }}/' versions
         cat versions
-    - uses: stefanzweifel/git-auto-commit-action@v5
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v7
       with:
-        commit_message: Update Version
-        file_pattern: versions
+        commit-message: Release ${{ steps.tag_version.outputs.new_tag }}
+        add-paths: versions
