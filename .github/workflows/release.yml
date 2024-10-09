@@ -3,12 +3,24 @@ on:
   push:
     branches:
     - main
-    paths:
-    - versions
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: check release
+      run: echo "RELEASE_COMMIT=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
+
+  non-release:
+    if: ${{ ! steps.chck.outputs.RELEASE_COMMIT }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: end
+      run: echo "This is not a release commit"
+
   update-tag:
-    if: "startsWith(github.event.head_commit.message, 'Release v')"
+    if: ${{ steps.chck.outputs.RELEASE_COMMIT }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
