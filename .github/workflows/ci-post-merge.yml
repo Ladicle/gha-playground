@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-tag:
-    if: "github.event.head_commit.message =~ 'Release v[0-9]+\\.[0-9]+\\.[0-9]+'"
+    if: "startsWith(github.event.head_commit.message, 'Release v')"
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.tag_version.outputs.new_version }}
