@@ -27,7 +27,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        ref: ${{ needs.update-tag.outputs.new_version }}
+        ref: v${{ needs.update-tag.outputs.new_version }}
     - name: Setup Go
       uses: actions/setup-go@v4
       with:
