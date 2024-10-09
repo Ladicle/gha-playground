@@ -21,7 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: end
-      run: echo "This is not a release commit: ${{ needs.check-release.outputs.release_commit }}"
+      run: |
+        echo "This is not a release commit ${{ needs.check-release.outputs.release_commit }}"
 
   update-tag:
     if: needs.check-release.outputs.release_commit == "true"
