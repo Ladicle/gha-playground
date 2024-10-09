@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       custom_tag:
-        description: "input a new tag name if you want to set non minor versions. (default: bump minor versions)"
+        description: "input a new tag name if you want to set non minor versions. (e.g., 0.23.1) (default: bump minor versions)"
 
 jobs:
   update-file:
