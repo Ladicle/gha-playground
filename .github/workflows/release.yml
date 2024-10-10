@@ -23,8 +23,8 @@ jobs:
       run: |
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
         which bash
-        bash -c './hack/update-versions.sh world'
-        ./hack/update-versions.sh world
+        bash -c './hack/test.sh world'
+        ./hack/test.sh world
 
   non-release:
     if: needs.check-release.outputs.release_commit == 'false'
