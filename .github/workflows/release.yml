@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_commit: ${{ steps.check.outputs.release_commit }}
+      test: ${{ startsWith(github.event.head_commit.message, 'Release v') }}
     steps:
     - id: check
       run: echo "release_commit=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
@@ -22,9 +23,13 @@ jobs:
     - name: end
       run: |
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
-        which bash
-        bash -c './hack/test.sh world'
+        echo "test '${{ needs.check-release.outputs.test }}'"
+        echo "---------------"
+        echo "$COMMIT_MESSAGE"
+        echo "---------------"
         ./hack/test.sh world
+      env:
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
   non-release:
     if: needs.check-release.outputs.release_commit == 'false'
