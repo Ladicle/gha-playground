@@ -27,6 +27,8 @@ jobs:
         echo "---------------"
         echo "$COMMIT_MESSAGE"
         echo "---------------"
+        foo=$(echo "$COMMIT_MESSAGE"| head -n1 | awk '{print $2}' |sed 's/v//')
+        echo "hello $foo"
         ./hack/test.sh world
       env:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
@@ -43,7 +45,7 @@ jobs:
         echo "This is not a release commit '${{ needs.check-release.outputs.release_commit }}'"
 
   update-tag:
-    if: needs.check-release.outputs.release_commit == 'true'
+    if: needs.check-release.outputs.test == 'true'
     needs: check-release
     runs-on: ubuntu-latest
     steps:

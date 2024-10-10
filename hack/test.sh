@@ -1,4 +1,5 @@
-# not to set a shebang explicitly for local and actions bash path difference
+#!/usr/bin/env bash
+
 set -eu -o pipefail
 
 name=$1
