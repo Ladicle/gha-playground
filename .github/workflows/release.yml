@@ -22,14 +22,9 @@ jobs:
     - name: end
       run: |
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
-        set -eu -o pipefail
         which bash
-        cat <<EOF > test.sh
-        #!/bin/bash -eu -o pipefail
-        echo 'hello'
-        EOF
-        chmod +x test.sh
-        ./test.sh
+        bash -c './hack/update-versions.sh world'
+        ./hack/update-versions.sh world
 
   non-release:
     if: needs.check-release.outputs.release_commit == 'false'
