@@ -22,6 +22,7 @@ jobs:
     - name: end
       run: |
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
+        set -eu -o pipefail
 
   non-release:
     if: needs.check-release.outputs.release_commit == 'false'
