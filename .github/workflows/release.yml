@@ -23,6 +23,13 @@ jobs:
       run: |
         echo "Release commit '${{ needs.check-release.outputs.release_commit }}'"
         set -eu -o pipefail
+        which bash
+        cat <<EOF > test.sh
+        #!/bin/bash -eu -o pipefail
+        echo 'hello'
+        EOF
+        chmod +x test.sh
+        ./test.sh
 
   non-release:
     if: needs.check-release.outputs.release_commit == 'false'
