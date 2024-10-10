@@ -32,7 +32,7 @@ jobs:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
   non-release:
-    if: needs.check-release.outputs.release_commit == 'false'
+    if: needs.check-release.outputs.test == 'false'
     needs:
     - check-release
     runs-on: ubuntu-latest
