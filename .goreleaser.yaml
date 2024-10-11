@@ -41,6 +41,7 @@ archives:
 brews:
 - name: ho
   repository:
+    owner: Ladicle
     name: tap
 
 changelog:
