@@ -12,7 +12,10 @@ jobs:
       test: ${{ startsWith(github.event.head_commit.message, 'Release v') }}
     steps:
     - id: check
-      run: echo "release_commit=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
+      run: |
+        echo ${{ github.ref }}
+        [ ${{github.ref}} -eq 'main ] && echo 'yes' || echo 'no'
+        echo "release_commit=${{ startsWith(github.event.head_commit.message, 'Release v') }}" >> "$GITHUB_OUTPUT"
 
   allways:
     needs:
