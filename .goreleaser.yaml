@@ -38,5 +38,8 @@ archives:
       - goos: windows
         format: zip
 
+brews:
+- name: ho
+
 changelog:
   disable: true
