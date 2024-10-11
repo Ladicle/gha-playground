@@ -40,6 +40,8 @@ archives:
 
 brews:
 - name: ho
+  repository:
+    name: tap
 
 changelog:
   disable: true
