@@ -45,6 +45,7 @@ brews:
   repository:
     owner: Ladicle
     name: tap
+    token: "{{ .Env.TAP_GITHUB_TOKEN }}"
 
 changelog:
   disable: true
