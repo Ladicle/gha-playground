@@ -36,11 +36,14 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: 1.23
-    - uses: actions/create-github-app-token@v1
+    - name: Generate GitHub App Token
+      uses: actions/create-github-app-token@v1
       id: app-token
       with:
         app-id: ${{ vars.APP_ID }}
         private-key: ${{ secrets.PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+        repositories: tap
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v6
       with:
