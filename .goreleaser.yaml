@@ -41,7 +41,7 @@ archives:
         format: zip
 
 brews:
-- name: ho
+- name: hello
   repository:
     owner: Ladicle
     name: tap
