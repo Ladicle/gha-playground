@@ -44,7 +44,7 @@ brews:
 - name: hello
   repository:
     owner: Ladicle
-    name: tap
+    name: homebrew-tap
     token: "{{ .Env.TAP_GITHUB_TOKEN }}"
 
 changelog:
