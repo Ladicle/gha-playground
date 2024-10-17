@@ -42,7 +42,7 @@ jobs:
       with:
         app-id: ${{ vars.APP_ID }}
         private-key: ${{ secrets.PRIVATE_KEY }}
-        repositories: tap
+        repositories: homebrew-tap
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v6
       with:
