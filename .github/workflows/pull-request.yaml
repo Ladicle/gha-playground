@@ -1,0 +1,17 @@
+on:
+  pull_request_target:
+  # for OSS with public contributions (forked PR)
+  pull_request:
+  # Useful for triaging code review, and generate compliance status check.
+  # Semantic release? Done.
+  # Make a file change in a mono repo. Tag the mono repo getting changed to generate better release!
+
+permissions:
+  pull-requests: write # for labeling pull requests (on: pull_request_target or on: pull_request)
+
+jobs:
+  labeler:
+    name: Labeler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fuxingloh/multi-labeler@v4
