@@ -5,13 +5,13 @@ labels:
     commits: '^BREAKING CHANGE: .*|^[^:!]+!: .*'
 - label: enhancement
   matcher:
-    commits: '^feat[^:!]*: .*'
+    commits: '^feat[^:]*: .*'
 - label: bug
   matcher:
-    commits: '^fix[^:!]*: .*'
+    commits: '^fix[^:]*: .*'
 - label: documentation
   matcher:
-    commits: '^docs[^:!]*: .*'
+    commits: '^docs[^:]*: .*'
 - label: skip-changelog
   matcher:
     commits: '^(chore|ci|refactor|revert)[^:!]*: .*'
