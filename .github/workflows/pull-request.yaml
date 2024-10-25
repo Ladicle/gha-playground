@@ -1,5 +1,7 @@
 on:
-  pull_request_target:
+  pull_request:
+    types:
+    - opened
 
 permissions:
   pull-requests: write # for labeling pull requests (on: pull_request_target or on: pull_request)
